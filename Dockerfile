@@ -17,7 +17,9 @@ RUN unzip -q sdk-tools-linux-$sdk_tools_version.zip
 RUN export ANDROID_HOME=$CI_PROJECT_DIR
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
-RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses 1>/dev/null
+#RUN set +o pipefail
+#RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses 1>/dev/null
+#RUN set -o pipefail
 
 # Make
 RUN apt-get update && apt-get install -y \
