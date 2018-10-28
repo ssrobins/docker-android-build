@@ -22,12 +22,15 @@ RUN cd ~/; \
     touch ~/.android/repositories.cfg; \
     yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
 
-# Make
-RUN apt-get update && apt-get install -y \
-  make
-
 # CMake
 ENV cmake_installer cmake-$cmake_version_major.$cmake_version_minor.$cmake_version_patch-Linux-x86_64.sh
 RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer
 RUN sh ./$cmake_installer --prefix=/usr --skip-license
 RUN rm $cmake_installer
+
+RUN apt-get update && apt-get install -y \
+  make
+  # Conan prerequisite
+  python3-pip \
+
+RUN pip3 install conan
