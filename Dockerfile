@@ -29,8 +29,8 @@ RUN sh ./$cmake_installer --prefix=/usr --skip-license
 RUN rm $cmake_installer
 
 RUN apt-get update && apt-get install -y \
-  make
+  make \
   # Conan prerequisite
-  python3-pip \
+  python3-pip
 
 RUN pip3 install conan
