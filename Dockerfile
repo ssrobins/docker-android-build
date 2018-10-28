@@ -16,11 +16,10 @@ RUN rm android-ndk-$android_ndk_version-linux-x86_64.zip
 RUN wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip
 RUN unzip -q sdk-tools-linux-$sdk_tools_version.zip
 RUN rm sdk-tools-linux-$sdk_tools_version.zip
-RUN export ANDROID_HOME=$CI_PROJECT_DIR
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
 #RUN set +o pipefail
-#RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses 1>/dev/null
+#RUN yes | /tools/bin/sdkmanager --licenses 1>/dev/null
 #RUN set -o pipefail
 
 # Make
