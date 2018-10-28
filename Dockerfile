@@ -10,12 +10,12 @@ ENV cmake_version_patch 0-rc2
 # Android NDK
 RUN wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip
 RUN unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip
-RUN rm -f android-ndk-$android_ndk_version-linux-x86_64.zip
+RUN rm android-ndk-$android_ndk_version-linux-x86_64.zip
 
 # Android SDK
 RUN wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip
 RUN unzip -q sdk-tools-linux-$sdk_tools_version.zip
-RUN rm -f sdk-tools-linux-$sdk_tools_version.zip
+RUN rm sdk-tools-linux-$sdk_tools_version.zip
 RUN export ANDROID_HOME=$CI_PROJECT_DIR
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
@@ -31,4 +31,6 @@ RUN apt-get update && apt-get install -y \
 ENV cmake_installer cmake-$cmake_version_major.$cmake_version_minor.$cmake_version_patch-Linux-x86_64.sh
 RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer
 RUN sh ./$cmake_installer --prefix=/usr --skip-license
+RUN rm $cmake_installer
 
+RUN ls -l
