@@ -35,5 +35,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install conan
 
+RUN java -version
 RUN cmake --version
 RUN conan --version
