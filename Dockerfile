@@ -29,21 +29,21 @@ RUN sh ./$cmake_installer --prefix=/usr --skip-license
 RUN rm $cmake_installer
 
 RUN apt-get update && apt-get install -y \
-  make \
-  # Conan prerequisite
-  python3-pip
+    make \
+    # Conan prerequisite
+    python3-pip
 
 RUN pip3 install conan
 
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
 RUN mkdir test; \
-  cd test; \
-  conan new test/0.0.1@steve/testing; \
-  conan install .; \
-  sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default; \
-  cd ..; \
-  rm -rf test
+    cd test; \
+    conan new test/0.0.1@steve/testing; \
+    conan install .; \
+    sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default; \
+    cd ..; \
+    rm -rf test
 
 RUN java -version
 RUN cmake --version
