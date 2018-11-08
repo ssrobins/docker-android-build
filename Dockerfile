@@ -5,7 +5,7 @@ ENV android_sdk_version 28
 ENV sdk_tools_version 4333796
 ENV cmake_version_major 3
 ENV cmake_version_minor 13
-ENV cmake_version_patch 0-rc2
+ENV cmake_version_patch 0-rc3
 
 # Android NDK
 RUN cd ~/; \
