@@ -1,5 +1,6 @@
 FROM openjdk:8u181
 
+ENV ANDROID_HOME=/root
 ENV android_ndk_version=r18b
 ENV android_sdk_version=28
 ENV sdk_tools_version=4333796
@@ -34,6 +35,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip
 
 RUN pip3 install conan
+RUN conan remote add conan https://api.bintray.com/conan/stever/conan
 
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
@@ -44,7 +46,3 @@ RUN mkdir test; \
     sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default; \
     cd ..; \
     rm -rf test
-
-RUN java -version
-RUN cmake --version
-RUN conan --version

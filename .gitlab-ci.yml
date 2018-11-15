@@ -6,6 +6,11 @@ services:
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
+after_script:
+  - java -version
+  - cmake --version
+  - conan --version
+
 build-master:
   stage: build
   script:
