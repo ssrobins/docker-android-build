@@ -52,7 +52,8 @@ RUN git clone https://gitlab.com/ssrobins/sdl2-example.git; \
     cd sdl2-example; \
     sh ./build_android.sh; \
     cd ..; \
-    rm -rf sdl2-example
+    rm -rf sdl2-example; \
+    conan remove \* -f
 
 RUN java -version
 RUN cmake --version
