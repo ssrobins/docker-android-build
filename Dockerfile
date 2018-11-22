@@ -37,6 +37,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install conan
 RUN conan remote add conan https://api.bintray.com/conan/stever/conan
+ARG CONAN_API_KEY
+RUN if [ -n "$CONAN_API_KEY" ]; then conan user -p $CONAN_API_KEY -r conan stever; fi
 
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
