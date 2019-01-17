@@ -2,7 +2,7 @@ FROM openjdk:8u181
 
 ENV ANDROID_HOME=/root
 ENV android_arch_abi=armeabi-v7a
-ENV android_ndk_version=r19
+ENV android_ndk_version=r18b
 ENV android_sdk_version=28
 ENV sdk_tools_version=4333796
 ARG cmake_version_major=3
