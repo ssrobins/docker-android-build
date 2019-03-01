@@ -52,11 +52,11 @@ cd .. && \
 rm -rf test
 
 # Run through a build so build-tools and Gradle get installed
-#RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
-#cd sdl2-example && \
-#sh ./build_android.sh && \
-#cd .. && \
-#rm -rf sdl2-example && \
-#conan remove \* -f
+RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
+cd sdl2-example && \
+sh ./build_android.sh && \
+cd .. && \
+rm -rf sdl2-example && \
+conan remove \* -f
 
 RUN java -version
