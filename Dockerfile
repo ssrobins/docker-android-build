@@ -1,8 +1,8 @@
 FROM openjdk:8u181
 
-RUN apt-get update && apt-get install --no-install-recommends -y \
-make && \
-rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install --no-install-recommends -y \
+#make && \
+#rm -rf /var/lib/apt/lists/*
 
 # Android NDK
 ENV ANDROID_HOME=/root
@@ -48,20 +48,20 @@ RUN conan remote add conan https://api.bintray.com/conan/stever/conan
 
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
-RUN mkdir test && \
-cd test && \
-conan new test/0.0.1@steve/testing && \
-conan install . && \
-sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default && \
-cd .. && \
-rm -rf test
+#RUN mkdir test && \
+#cd test && \
+#conan new test/0.0.1@steve/testing && \
+#conan install . && \
+#sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default && \
+#cd .. && \
+#rm -rf test
 
 # Run through a build so build-tools and Gradle get installed
-RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
-cd sdl2-example && \
-sh ./build_android.sh && \
-cd .. && \
-rm -rf sdl2-example && \
-conan remove \* -f
+#RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
+#cd sdl2-example && \
+#sh ./build_android.sh && \
+#cd .. && \
+#rm -rf sdl2-example && \
+#conan remove \* -f
 
 RUN java -version
