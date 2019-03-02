@@ -1,8 +1,8 @@
 FROM openjdk:8u181
 
-#RUN apt-get update && apt-get install --no-install-recommends -y \
-#make && \
-#rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --no-install-recommends -y \
+make && \
+rm -rf /var/lib/apt/lists/*
 
 # Android NDK
 ENV ANDROID_HOME=/root
