@@ -48,20 +48,20 @@ RUN conan remote add conan https://api.bintray.com/conan/stever/conan
 
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
-RUN mkdir test && \
-cd test && \
-conan new test/0.0.1@steve/testing && \
-conan install . -s compiler=clang && \
-sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default && \
-cd .. && \
-rm -rf test
+#RUN mkdir test && \
+#cd test && \
+#conan new test/0.0.1@steve/testing && \
+#conan install . -s compiler=clang && \
+#sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default && \
+#cd .. && \
+#rm -rf test
 
 # Run through a build so build-tools and Gradle get installed
-#RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
-#cd sdl2-example && \
-#sh ./build_android.sh && \
-#cd .. && \
-#rm -rf sdl2-example && \
-#conan remove \* -f
+RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
+cd sdl2-example && \
+sh ./build_android.sh && \
+cd .. && \
+rm -rf sdl2-example && \
+conan remove \* -f
 
 RUN java -version
