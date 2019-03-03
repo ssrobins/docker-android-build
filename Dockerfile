@@ -54,7 +54,7 @@ RUN clang++
 RUN mkdir test && \
 cd test && \
 conan new test/0.0.1@steve/testing && \
-conan install . && \
+conan install . -s compiler=clang && \
 sed -i 's/libstdc++/libstdc++11/' /root/.conan/profiles/default && \
 cd .. && \
 rm -rf test
