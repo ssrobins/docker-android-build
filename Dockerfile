@@ -46,9 +46,6 @@ rm -rf /var/lib/apt/lists/*
 RUN if [ "$conan_version" != "$(conan --version | grep Conan | cut -d ' ' -f3)" ]; then echo "Conan version $conan_version not found!"; exit 1; fi
 RUN conan remote add conan https://api.bintray.com/conan/stever/conan
 
-RUN ln -s $ANDROID_HOME/android-ndk-$android_ndk_version/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ /usr/local/bin/clang++
-RUN clang++
-
 # Run 'conan new' to create a default profile then update it
 # to prevent an 'OLD ABI' warning.
 RUN mkdir test && \
