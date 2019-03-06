@@ -1,4 +1,4 @@
-FROM openjdk:8u191-jdk-alpine3.9
+FROM openjdk:8u181-jdk-slim-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
 make && \
