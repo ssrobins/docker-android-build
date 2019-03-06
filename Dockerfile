@@ -1,4 +1,4 @@
-FROM openjdk:8u181-jdk-slim-stretch
+FROM openjdk:8u181-jdk-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
 make \
