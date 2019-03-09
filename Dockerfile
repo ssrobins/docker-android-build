@@ -28,7 +28,7 @@ yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
 # CMake
 ARG cmake_version_major=3
 ARG cmake_version_minor=14
-ARG cmake_version_patch=0-rc3
+ARG cmake_version_patch=0-rc4
 ARG cmake_version_full=$cmake_version_major.$cmake_version_minor.$cmake_version_patch
 ARG cmake_installer=cmake-$cmake_version_full-Linux-x86_64.sh
 RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer && \
