@@ -46,4 +46,11 @@ python3-dev python3-pip python3-setuptools python3-wheel && \
 rm -rf /var/lib/apt/lists/*
 RUN if [ "$conan_version" != "$(conan --version | grep Conan | cut -d ' ' -f3)" ]; then echo "Conan version $conan_version not found!"; exit 1; fi
 
+# Gradle
+RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
+cd sdl2-example/Android && \
+sh ./gradlew --version && \
+cd ../.. && \
+rm -rf sdl2-example
+
 RUN java -version
