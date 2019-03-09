@@ -47,10 +47,14 @@ rm -rf /var/lib/apt/lists/*
 RUN if [ "$conan_version" != "$(conan --version | grep Conan | cut -d ' ' -f3)" ]; then echo "Conan version $conan_version not found!"; exit 1; fi
 
 # Gradle
-RUN git clone https://gitlab.com/ssrobins/sdl2-example.git && \
+RUN apt-get update && apt-get install --no-install-recommends -y git && \
+git clone https://gitlab.com/ssrobins/sdl2-example.git && \
 cd sdl2-example/Android && \
 sh ./gradlew --version && \
 cd ../.. && \
-rm -rf sdl2-example
+rm -rf sdl2-example && \
+apt-get remove -y git && \
+rm -rf /var/lib/apt/lists/*
+
 
 RUN java -version
