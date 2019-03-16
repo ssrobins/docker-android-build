@@ -8,7 +8,7 @@ rm -rf /var/lib/apt/lists/*
 # Android NDK
 ENV ANDROID_HOME=/root
 ENV android_arch_abi=armeabi-v7a
-ENV android_ndk_version=r19b
+ENV android_ndk_version=r19c
 RUN cd ~/ && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
