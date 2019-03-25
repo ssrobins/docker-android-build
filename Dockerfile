@@ -28,7 +28,7 @@ yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
 # Android signing config
 ARG key_store_path=/root/android.jks
 ARG gradle_config_dir=/root/.gradle
-RUN echo "$ANDROID_KEY_STORE" | base64 --decode > $key_store_path && \
+RUN echo $ANDROID_KEY_STORE | base64 --decode > $key_store_path && \
 mkdir $gradle_config_dir && \
 echo "ANDROID_KEY_STORE_PATH=$key_store_path\n\
 ANDROID_KEY_STORE_PASSWORD=$ANDROID_KEY_STORE_PASSWORD\n\
