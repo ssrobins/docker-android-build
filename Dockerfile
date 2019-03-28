@@ -36,8 +36,7 @@ mkdir $gradle_config_dir && \
 echo "ANDROID_KEY_STORE_PATH=$key_store_path\n\
 ANDROID_KEY_STORE_PASSWORD=$ANDROID_KEY_STORE_PASSWORD\n\
 ANDROID_KEY_ALIAS=androidUploadKey\n\
-ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.properties && \
-cat $key_store_path
+ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.properties
 
 # CMake
 ARG cmake_version_major=3
