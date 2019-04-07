@@ -9,7 +9,7 @@ rm -rf /var/lib/apt/lists/*
 ENV ANDROID_HOME=/root
 ENV android_arch_abi=armeabi-v7a
 ENV android_ndk_version=r19c
-RUN cd ~/ && \
+RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
 rm android-ndk-$android_ndk_version-linux-x86_64.zip
@@ -17,7 +17,7 @@ rm android-ndk-$android_ndk_version-linux-x86_64.zip
 # Android SDK
 ENV android_sdk_version=28
 ENV sdk_tools_version=4333796
-RUN cd ~/ && \
+RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip && \
 unzip -q sdk-tools-linux-$sdk_tools_version.zip && \
 rm sdk-tools-linux-$sdk_tools_version.zip && \
