@@ -50,7 +50,7 @@ rm $cmake_installer
 RUN if [ "$cmake_version_full" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version_full not found!"; exit 1; fi
 
 # Conan
-ARG conan_version=1.14.5
+ARG conan_version=1.15.0
 RUN apt-get update && apt-get install --no-install-recommends -y \
 python3-dev python3-pip python3-setuptools python3-wheel && \
 pip3 install conan==$conan_version && \
