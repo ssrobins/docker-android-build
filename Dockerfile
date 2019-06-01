@@ -41,7 +41,7 @@ ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.propert
 # CMake
 ARG cmake_version_major=3
 ARG cmake_version_minor=14
-ARG cmake_version_patch=4
+ARG cmake_version_patch=5
 ARG cmake_version_full=$cmake_version_major.$cmake_version_minor.$cmake_version_patch
 ARG cmake_installer=cmake-$cmake_version_full-Linux-x86_64.sh
 RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer && \
