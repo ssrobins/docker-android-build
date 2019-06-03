@@ -1,7 +1,7 @@
 FROM openjdk:8u212-jdk-slim-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-unzip wget && \
+make unzip wget && \
 rm -rf /var/lib/apt/lists/*
 
 # Android NDK
