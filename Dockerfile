@@ -2,7 +2,7 @@ FROM openjdk:8u212-jdk-slim-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
 make \
-wget && \
+unzip wget && \
 rm -rf /var/lib/apt/lists/*
 
 # Android NDK
@@ -41,7 +41,7 @@ ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.propert
 # CMake
 ARG cmake_version_major=3
 ARG cmake_version_minor=14
-ARG cmake_version_patch=3
+ARG cmake_version_patch=5
 ARG cmake_version_full=$cmake_version_major.$cmake_version_minor.$cmake_version_patch
 ARG cmake_installer=cmake-$cmake_version_full-Linux-x86_64.sh
 RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer && \
@@ -50,7 +50,7 @@ rm $cmake_installer
 RUN if [ "$cmake_version_full" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version_full not found!"; exit 1; fi
 
 # Conan
-ARG conan_version=1.15.0
+ARG conan_version=1.15.2
 RUN apt-get update && apt-get install --no-install-recommends -y \
 python3-dev python3-pip python3-setuptools python3-wheel && \
 pip3 install conan==$conan_version && \
