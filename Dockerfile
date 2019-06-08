@@ -13,7 +13,6 @@ unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
 rm android-ndk-$android_ndk_version-linux-x86_64.zip
 
 # Android SDK
-ENV android_sdk_version=28
 ENV sdk_tools_version=4333796
 RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip && \
