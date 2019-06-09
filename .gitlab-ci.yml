@@ -4,10 +4,10 @@ services:
   - docker:dind
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - docker login --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" . --build-arg "ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" --build-arg "ANDROID_KEY_STORE=$ANDROID_KEY_STORE" --build-arg "ANDROID_KEY_STORE_PASSWORD=$ANDROID_KEY_STORE_PASSWORD"
+    - docker build --pull --tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" . --build-arg "ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" --build-arg "ANDROID_KEY_STORE=$ANDROID_KEY_STORE" --build-arg "ANDROID_KEY_STORE_PASSWORD=$ANDROID_KEY_STORE_PASSWORD"
     - docker push "$CI_REGISTRY_IMAGE"
