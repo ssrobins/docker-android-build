@@ -36,15 +36,12 @@ ANDROID_KEY_ALIAS=androidUploadKey\n\
 ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.properties
 
 # CMake
-ARG cmake_version_major=3
-ARG cmake_version_minor=15
-ARG cmake_version_patch=3
-ARG cmake_version_full=$cmake_version_major.$cmake_version_minor.$cmake_version_patch
-ARG cmake_installer=cmake-$cmake_version_full-Linux-x86_64.sh
-RUN wget --no-verbose https://cmake.org/files/v$cmake_version_major.$cmake_version_minor/$cmake_installer && \
+ARG cmake_version=3.15.3
+ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
+RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
 sh ./$cmake_installer --prefix=/usr --skip-license && \
 rm $cmake_installer
-RUN if [ "$cmake_version_full" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version_full not found!"; exit 1; fi
+RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version not found!"; exit 1; fi
 
 # Conan
 ARG conan_version=1.18.4
