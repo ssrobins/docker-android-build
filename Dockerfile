@@ -36,7 +36,7 @@ ANDROID_KEY_ALIAS=androidUploadKey\n\
 ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.properties
 
 # CMake
-ARG cmake_version=3.15.4
+ARG cmake_version=3.16.0-rc1
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
 RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
 sh ./$cmake_installer --prefix=/usr --skip-license && \
