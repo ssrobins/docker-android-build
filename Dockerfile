@@ -1,4 +1,6 @@
-FROM openjdk:8u212-b04-jdk-slim-stretch
+ARG jdk_version
+ARG ndk_version
+FROM openjdk:$jdk_version-jdk-slim-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
 git make unzip wget && \
@@ -6,7 +8,7 @@ rm -rf /var/lib/apt/lists/*
 
 # Android NDK
 ENV ANDROID_HOME=/root
-ENV android_ndk_version=r20
+ENV android_ndk_version=$ndk_version
 RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
