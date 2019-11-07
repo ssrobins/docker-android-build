@@ -8,7 +8,7 @@ rm -rf /var/lib/apt/lists/*
 # Android NDK
 ENV ANDROID_HOME=/root
 ARG ndk_version
-ENV android_ndk_version=$ndk_version
+ENV android_ndk_version=r$ndk_version
 RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
