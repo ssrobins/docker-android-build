@@ -55,7 +55,7 @@ rm $ninja_installer
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
 
 # Conan
-ARG conan_version=1.20.2
+ARG conan_version=1.20.3
 RUN apt-get update && apt-get install --no-install-recommends -y \
 python3-dev python3-pip python3-setuptools python3-wheel && \
 pip3 install conan==$conan_version && \
