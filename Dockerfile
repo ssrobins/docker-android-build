@@ -58,12 +58,12 @@ RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]
 # Ninja
 ARG ninja_version=1.9.0
 ARG ninja_installer=ninja-linux.zip
-RUN apt-get update && apt-get install --no-install-recommends -y wget && \
+RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
 wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_installer && \
 unzip $ninja_installer && \
 cp ninja /usr/bin/ && \
 rm $ninja_installer && \
-apt-get purge -y wget && \
+apt-get purge -y unzip wget && \
 apt-get autoremove -y && \
 rm -rf /var/lib/apt/lists/*
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
