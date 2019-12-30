@@ -13,6 +13,7 @@ RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
 rm android-ndk-$android_ndk_version-linux-x86_64.zip
+RUN make --version
 
 # Android SDK
 ENV sdk_tools_version=4333796
