@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y wget && \
 wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_installer && \
 unzip $ninja_installer && \
 cp ninja /usr/bin/ && \
-rm $ninja_installer
+rm $ninja_installer && \
 apt-get purge -y wget && \
 apt-get autoremove -y && \
 rm -rf /var/lib/apt/lists/*
