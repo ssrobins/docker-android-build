@@ -1,34 +1,29 @@
 ARG jdk_version
 FROM openjdk:$jdk_version-jdk-slim-stretch
 
+RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
+rm -rf /var/lib/apt/lists/*
+
 # Android NDK
 ENV ANDROID_HOME=/root
 ARG ndk_version
 ENV android_ndk_version=r$ndk_version
-RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
-cd $ANDROID_HOME && \
+RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
-rm android-ndk-$android_ndk_version-linux-x86_64.zip && \
-apt-get purge -y unzip wget && \
-apt-get autoremove -y && \
-rm -rf /var/lib/apt/lists/*
+rm android-ndk-$android_ndk_version-linux-x86_64.zip
 ENV PATH=$ANDROID_HOME/android-ndk-$android_ndk_version/prebuilt/linux-x86_64/bin:$PATH
 RUN make --version
 
 # Android SDK
 ENV sdk_tools_version=4333796
-RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
-cd $ANDROID_HOME && \
+RUN cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip && \
 unzip -q sdk-tools-linux-$sdk_tools_version.zip && \
 rm sdk-tools-linux-$sdk_tools_version.zip && \
 mkdir ~/.android && \
 touch ~/.android/repositories.cfg && \
-yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null && \
-apt-get purge -y unzip wget && \
-apt-get autoremove -y && \
-rm -rf /var/lib/apt/lists/*
+yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
 
 # Android signing config
 ARG ANDROID_KEY_PASSWORD
@@ -46,26 +41,18 @@ ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.propert
 # CMake
 ARG cmake_version=3.16.2
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
-RUN apt-get update && apt-get install --no-install-recommends -y wget && \
-wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
+RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
 sh ./$cmake_installer --prefix=/usr --skip-license && \
-rm $cmake_installer && \
-apt-get purge -y wget && \
-apt-get autoremove -y && \
-rm -rf /var/lib/apt/lists/*
+rm $cmake_installer
 RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version not found!"; exit 1; fi
 
 # Ninja
 ARG ninja_version=1.9.0
 ARG ninja_installer=ninja-linux.zip
-RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
-wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_installer && \
+RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_installer && \
 unzip $ninja_installer && \
 cp ninja /usr/bin/ && \
-rm $ninja_installer && \
-apt-get purge -y unzip wget && \
-apt-get autoremove -y && \
-rm -rf /var/lib/apt/lists/*
+rm $ninja_installer
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
 
 # Conan
