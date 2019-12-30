@@ -1,30 +1,34 @@
 ARG jdk_version
 FROM openjdk:$jdk_version-jdk-slim-stretch
 
-RUN apt-get update && apt-get install --no-install-recommends -y \
-unzip wget && \
-rm -rf /var/lib/apt/lists/*
-
 # Android NDK
 ENV ANDROID_HOME=/root
 ARG ndk_version
 ENV android_ndk_version=r$ndk_version
-RUN cd $ANDROID_HOME && \
+RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
+cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip && \
 unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip && \
-rm android-ndk-$android_ndk_version-linux-x86_64.zip
+rm android-ndk-$android_ndk_version-linux-x86_64.zip && \
+apt-get purge -y unzip wget && \
+apt-get autoremove -y && \
+rm -rf /var/lib/apt/lists/*
 ENV PATH=$ANDROID_HOME/android-ndk-$android_ndk_version/prebuilt/linux-x86_64/bin:$PATH
 RUN make --version
 
 # Android SDK
 ENV sdk_tools_version=4333796
-RUN cd $ANDROID_HOME && \
+RUN apt-get install --no-install-recommends -y unzip wget && \
+cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip && \
 unzip -q sdk-tools-linux-$sdk_tools_version.zip && \
 rm sdk-tools-linux-$sdk_tools_version.zip && \
 mkdir ~/.android && \
 touch ~/.android/repositories.cfg && \
-yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
+yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null && \
+apt-get purge -y unzip wget && \
+apt-get autoremove -y && \
+rm -rf /var/lib/apt/lists/*
 
 # Android signing config
 ARG ANDROID_KEY_PASSWORD
@@ -42,9 +46,13 @@ ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.propert
 # CMake
 ARG cmake_version=3.16.2
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
-RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
+RUN apt-get install --no-install-recommends -y wget && \
+wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
 sh ./$cmake_installer --prefix=/usr --skip-license && \
-rm $cmake_installer
+rm $cmake_installer && \
+apt-get purge -y wget && \
+apt-get autoremove -y && \
+rm -rf /var/lib/apt/lists/*
 RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version not found!"; exit 1; fi
 
 # Ninja
