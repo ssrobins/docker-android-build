@@ -61,6 +61,7 @@ python3-pip python3-setuptools python3-wheel && \
 pip3 install conan==$conan_version && \
 apt-get remove -y \
 python3-pip python3-setuptools python3-wheel && \
+apt-get autoremove -y && \
 rm -rf /var/lib/apt/lists/*
 RUN if [ "$conan_version" != "$(conan --version | grep Conan | cut -d ' ' -f3)" ]; then echo "Conan version $conan_version not found!"; exit 1; fi
 
