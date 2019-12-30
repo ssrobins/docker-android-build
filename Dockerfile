@@ -18,7 +18,7 @@ RUN make --version
 
 # Android SDK
 ENV sdk_tools_version=4333796
-RUN apt-get install --no-install-recommends -y unzip wget && \
+RUN apt-get update && apt-get install --no-install-recommends -y unzip wget && \
 cd $ANDROID_HOME && \
 wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip && \
 unzip -q sdk-tools-linux-$sdk_tools_version.zip && \
@@ -46,7 +46,7 @@ ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.propert
 # CMake
 ARG cmake_version=3.16.2
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
-RUN apt-get install --no-install-recommends -y wget && \
+RUN apt-get update && apt-get install --no-install-recommends -y wget && \
 wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer && \
 sh ./$cmake_installer --prefix=/usr --skip-license && \
 rm $cmake_installer && \
