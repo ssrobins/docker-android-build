@@ -2,7 +2,7 @@ ARG jdk_version
 FROM openjdk:$jdk_version-jdk-slim-stretch
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-make unzip wget && \
+unzip wget && \
 rm -rf /var/lib/apt/lists/*
 
 # Android NDK
