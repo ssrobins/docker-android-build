@@ -1,5 +1,5 @@
 ARG jdk_version
-FROM openjdk:$jdk_version-jdk-slim-stretch
+FROM amd64/openjdk:$jdk_version-jdk-slim
 
 RUN apt-get update \
 && apt-get install --no-install-recommends -y git unzip wget \
