@@ -40,7 +40,7 @@ ANDROID_KEY_ALIAS=androidUploadKey\n\
 ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $gradle_config_dir/gradle.properties
 
 # CMake
-ARG cmake_version=3.16.3
+ARG cmake_version=3.16.4
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
 RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer \
 && sh ./$cmake_installer --prefix=/usr --skip-license \
@@ -57,7 +57,7 @@ RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$n
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
 
 # Conan
-ARG conan_version=1.21.2
+ARG conan_version=1.22.0
 RUN apt-get update \
 && apt-get install --no-install-recommends -y python3-minimal python3-pip python3-setuptools python3-wheel \
 && pip3 install conan==$conan_version \
