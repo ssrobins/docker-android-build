@@ -1,5 +1,5 @@
 variables:
-  docker_version: "19.03.5"
+  docker_version: "19.03.7"
 
 image: docker:$docker_version
 
