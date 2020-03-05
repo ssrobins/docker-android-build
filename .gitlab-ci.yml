@@ -1,7 +1,10 @@
-image: docker:19.03.5
+variables:
+  docker_version: "19.03.5"
+
+image: docker:$docker_version
 
 services:
-  - docker:19.03.5-dind
+  - docker:$docker_version-dind
 
 before_script:
   - docker login --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
