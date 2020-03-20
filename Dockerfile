@@ -17,14 +17,15 @@ ENV PATH=$ANDROID_HOME/android-ndk-$android_ndk_version/prebuilt/linux-x86_64/bi
 RUN make --version
 
 # Android SDK
-ENV sdk_tools_version=4333796
+ARG sdk_tools_version=6200805
+ARG sdk_zip=commandlinetools-linux-${sdk_tools_version}_latest.zip
 RUN cd $ANDROID_HOME \
-&& wget --no-verbose https://dl.google.com/android/repository/sdk-tools-linux-$sdk_tools_version.zip \
-&& unzip -q sdk-tools-linux-$sdk_tools_version.zip \
-&& rm sdk-tools-linux-$sdk_tools_version.zip \
+&& wget --no-verbose https://dl.google.com/android/repository/$sdk_zip \
+&& unzip -q $sdk_zip \
+&& rm $sdk_zip \
 && mkdir ~/.android \
 && touch ~/.android/repositories.cfg \
-&& yes | ~/tools/bin/sdkmanager --licenses 1>/dev/null
+&& yes | ~/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses 1>/dev/null
 
 # Android signing config
 ARG ANDROID_KEY_PASSWORD
