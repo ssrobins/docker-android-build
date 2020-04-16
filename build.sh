@@ -2,7 +2,7 @@ set -e
 
 cd $(dirname "$0")
 
-jdk_version=8u242
+jdk_version=8u252
 ndk_version=21
 
 if [ -z "$CI_REGISTRY_IMAGE" ]; then
