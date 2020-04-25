@@ -3,7 +3,7 @@ set -e
 cd $(dirname "$0")
 
 jdk_version=8u252
-ndk_version=21
+ndk_version=21b
 
 if [ -z "$CI_REGISTRY_IMAGE" ]; then
     CI_REGISTRY_IMAGE=docker-android-build
