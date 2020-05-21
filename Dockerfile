@@ -58,7 +58,7 @@ RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$n
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
 
 # Conan
-ARG conan_version=1.25.1
+ARG conan_version=1.25.2
 RUN apt-get update \
 && apt-get install --no-install-recommends -y python3-minimal python3-pip python3-setuptools python3-wheel \
 && pip3 install conan==$conan_version \
