@@ -17,7 +17,7 @@ ENV PATH=$ANDROID_HOME/android-ndk-$android_ndk_version/prebuilt/linux-x86_64/bi
 RUN make --version
 
 # Android SDK
-ARG sdk_tools_version=6200805
+ARG sdk_tools_version=6514223
 ARG sdk_zip=commandlinetools-linux-${sdk_tools_version}_latest.zip
 RUN cd $ANDROID_HOME \
 && wget --no-verbose https://dl.google.com/android/repository/$sdk_zip \
