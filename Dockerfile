@@ -6,26 +6,27 @@ RUN apt-get update \
 && rm -rf /var/lib/apt/lists/*
 
 # Android NDK
-ENV ANDROID_HOME=/root
 ARG ndk_version
-ENV android_ndk_version=r$ndk_version
-RUN cd $ANDROID_HOME \
-&& wget --no-verbose https://dl.google.com/android/repository/android-ndk-$android_ndk_version-linux-x86_64.zip \
-&& unzip -q android-ndk-$android_ndk_version-linux-x86_64.zip \
-&& rm android-ndk-$android_ndk_version-linux-x86_64.zip
-ENV PATH=$ANDROID_HOME/android-ndk-$android_ndk_version/prebuilt/linux-x86_64/bin:$PATH
+ARG ndk_zip=android-ndk-r$ndk_version-linux-x86_64.zip
+RUN wget --no-verbose https://dl.google.com/android/repository/$ndk_zip \
+&& unzip -q $ndk_zip \
+&& rm $ndk_zip
+ENV ANDROID_NDK_ROOT=/android-ndk-r$ndk_version
+ENV PATH=$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin:$PATH
 RUN make --version
 
 # Android SDK
 ARG sdk_tools_version=6609375
 ARG sdk_zip=commandlinetools-linux-${sdk_tools_version}_latest.zip
-RUN cd $ANDROID_HOME \
+ENV ANDROID_SDK_ROOT=/android-sdk-$sdk_tools_version
+RUN mkdir $ANDROID_SDK_ROOT \
+&& cd $ANDROID_SDK_ROOT \
 && wget --no-verbose https://dl.google.com/android/repository/$sdk_zip \
 && unzip -q $sdk_zip \
 && rm $sdk_zip \
 && mkdir ~/.android \
 && touch ~/.android/repositories.cfg \
-&& yes | ~/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses 1>/dev/null
+&& yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses 1>/dev/null
 
 # Android signing config
 ARG ANDROID_KEY_PASSWORD
@@ -50,11 +51,11 @@ RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]
 
 # Ninja
 ARG ninja_version=1.10.0
-ARG ninja_installer=ninja-linux.zip
-RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_installer \
-&& unzip $ninja_installer \
+ARG ninja_zip=ninja-linux.zip
+RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_zip \
+&& unzip $ninja_zip \
 && cp ninja /usr/bin/ \
-&& rm $ninja_installer
+&& rm $ninja_zip
 RUN if [ "$ninja_version" != "$(ninja --version)" ]; then echo "Ninja version $ninja_version not found!"; exit 1; fi
 
 # Conan
