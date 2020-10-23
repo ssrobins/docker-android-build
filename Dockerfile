@@ -16,7 +16,7 @@ ENV PATH=$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin:$PATH
 RUN make --version
 
 # Android SDK
-ARG sdk_tools_version=6609375
+ARG sdk_tools_version=6858069
 ARG sdk_zip=commandlinetools-linux-${sdk_tools_version}_latest.zip
 ENV ANDROID_SDK_ROOT=/android-sdk-$sdk_tools_version
 RUN mkdir $ANDROID_SDK_ROOT \
@@ -26,7 +26,7 @@ RUN mkdir $ANDROID_SDK_ROOT \
 && rm $sdk_zip \
 && mkdir ~/.android \
 && touch ~/.android/repositories.cfg \
-&& yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses 1>/dev/null
+&& yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses 1>/dev/null
 
 # CMake
 ARG cmake_version=3.19.0-rc1
