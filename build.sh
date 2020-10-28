@@ -2,7 +2,7 @@ set -e
 
 cd $(dirname "$0")
 
-jdk_version=8u265
+jdk_version=8u272
 ndk_version=21d
 
 if [ -z "$DOCKER_IMAGE_NAME" ]; then
