@@ -29,7 +29,7 @@ RUN mkdir $ANDROID_SDK_ROOT \
 && yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses 1>/dev/null
 
 # CMake
-ARG cmake_version=3.19.0-rc2
+ARG cmake_version=3.19.0-rc3
 ARG cmake_installer=cmake-$cmake_version-Linux-x86_64.sh
 RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake_version/$cmake_installer \
 && sh ./$cmake_installer --prefix=/usr --skip-license \
