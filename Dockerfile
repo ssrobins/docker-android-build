@@ -37,7 +37,7 @@ RUN wget --no-verbose https://github.com/Kitware/CMake/releases/download/v$cmake
 RUN if [ "$cmake_version" != "$(cmake --version | head -n 1 | cut -d ' ' -f3)" ]; then echo "CMake version $cmake_version not found!"; exit 1; fi
 
 # Ninja
-ARG ninja_version=1.10.1
+ARG ninja_version=1.10.2
 ARG ninja_zip=ninja-linux.zip
 RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v$ninja_version/$ninja_zip \
 && unzip $ninja_zip \
