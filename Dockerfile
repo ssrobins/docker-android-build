@@ -16,7 +16,7 @@ ENV PATH=$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin:$PATH
 RUN make --version
 
 # Android SDK
-ARG sdk_tools_version=6858069
+ARG sdk_tools_version=7583922
 ARG sdk_zip=commandlinetools-linux-${sdk_tools_version}_latest.zip
 ENV ANDROID_SDK_ROOT=/android-sdk-$sdk_tools_version
 RUN mkdir $ANDROID_SDK_ROOT \
