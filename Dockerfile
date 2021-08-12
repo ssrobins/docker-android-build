@@ -7,7 +7,7 @@ RUN apt-get update \
 
 # Android NDK
 ARG ndk_version
-ARG ndk_zip=android-ndk-r$ndk_version-linux-x86_64.zip
+ARG ndk_zip=android-ndk-r$ndk_version-linux.zip
 RUN wget --no-verbose https://dl.google.com/android/repository/$ndk_zip \
 && unzip -q $ndk_zip \
 && rm $ndk_zip

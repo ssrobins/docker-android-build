@@ -3,7 +3,7 @@ set -e
 cd $(dirname "$0")
 
 jdk_version=8u302
-ndk_version=22b
+ndk_version=23
 
 if [ -z "$DOCKER_IMAGE_NAME" ]; then
     DOCKER_IMAGE_NAME=docker-android-build
